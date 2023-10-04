@@ -48,7 +48,7 @@ jobs:
       - name: Compare Protobuf Files
         run: |
           # Replace with the appropriate comparison command for your files
-          if sum /home/runner/work/base-repo/base-repo/proto/proto-main/com/karam/proto/events/Employee.java.pb.meta == sum /home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java.pb.meta; then
+          if diff -qs <(sort /home/runner/work/base-repo/base-repo/proto/proto-main/com/karam/proto/events/Employee.java|grep -iv trailer) <(sort /home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java| grep -iv trailer); then
             echo "No changes detected in protobuf files"
           else
             echo "Changes detected in protobuf files"
