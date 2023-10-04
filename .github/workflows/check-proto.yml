@@ -15,9 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v2
-        
+      - name: install protoc
+        uses: arduino/setup-protoc@v1
+        with:
+          version: '3.x'
+
       - name: Download Proto Files from Other Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
