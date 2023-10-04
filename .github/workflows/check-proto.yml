@@ -32,7 +32,6 @@ jobs:
           echo ls
           ls
           echo java
-          java -v
 
       - name: Compile Protobuf Files
         run: |
