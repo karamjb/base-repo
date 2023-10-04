@@ -59,6 +59,10 @@ jobs:
             exit 0
           else
             echo "File sizes are not equal."
+            echo file1
+            size1
+            echo file2
+            size2
             exit 1
           fi
 
