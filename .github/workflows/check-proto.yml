@@ -1,6 +1,7 @@
 name: Check Proto Files
 
 on:
+  push:
   workflow_run:
     workflows: ["Detect Proto Changes"]
     types:
@@ -18,12 +19,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
-          unzip -q archive.zip -d output_folder
+          # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
+          curl -L -O https://github.com/karamjb/proto/archive/refs/heads/main.zip
+          unzip -q main.zip -d /proto
+          
       - name: Compile Protobuf Files
-  run: |
-    # Replace with the actual command to compile protobuf files
-    protoc --go_out=. path/to/protobuf/files/*.proto
-  working-directory: path/to/protobuf/files
+        run: |
+          # Replace with the actual command to compile protobuf files
+          protoc -I=. --java_out=./ --java_opt="annotate_code" employee.proto
+          working-directory: /proto/proto-main
 
-      # Add additional steps as needed to build or use the copied output files
+      - name: Compare Protobuf Files
+        run: |
+          # Replace with the appropriate comparison command for your files
+          if diff -rq /proto/proto-main/com/karam/proto/events/Employee.java ./com/karam/proto/events/Employee.java; then
+            echo "No changes detected in protobuf files"
+          else
+            echo "Changes detected in protobuf files"
+            # Add any actions or commands you want to perform when changes are detected
+          fi
+
