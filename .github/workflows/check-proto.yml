@@ -36,7 +36,7 @@ jobs:
         run: |
           # Replace with the actual command to compile protobuf files
 
-          cd /home/runner/work/base-repo/proto/proto-main
+          cd /home/runner/work/base-repo/base-repo/proto/proto-main
 
           echo pwd
           pwd
