@@ -15,6 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v2
+        
       - name: Download Proto Files from Other Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +25,7 @@ jobs:
           # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
           curl -L -O https://github.com/karamjb/proto/archive/refs/heads/main.zip
           unzip -q main.zip -d ~/proto
-          
+
       - name: Compile Protobuf Files
         run: |
           # Replace with the actual command to compile protobuf files
