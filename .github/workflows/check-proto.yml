@@ -1,0 +1,29 @@
+name: Check Proto Files
+
+on:
+  workflow_run:
+    workflows: ["Detect Proto Changes"]
+    types:
+      - completed
+
+jobs:
+  copy-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download Proto Files from Other Repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
+          unzip -q archive.zip -d output_folder
+      - name: Compile Protobuf Files
+  run: |
+    # Replace with the actual command to compile protobuf files
+    protoc --go_out=. path/to/protobuf/files/*.proto
+  working-directory: path/to/protobuf/files
+
+      # Add additional steps as needed to build or use the copied output files
