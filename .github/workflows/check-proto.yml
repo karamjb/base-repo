@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install protobuf
-        run: apt install -y protobuf-compiler
+        run: sudo apt install -y protobuf-compiler
     
       - name: Download Proto Files from Other Repository
         env:
