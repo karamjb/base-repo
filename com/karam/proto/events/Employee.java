@@ -206,11 +206,6 @@ public final class Employee {
       return new EventMessage();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.karam.proto.events.Employee.internal_static_dto_EventMessage_descriptor;
@@ -224,6 +219,7 @@ public final class Employee {
               com.karam.proto.events.Employee.EventMessage.class, com.karam.proto.events.Employee.EventMessage.Builder.class);
     }
 
+    private int bitField0_;
     public static final int TYPE_FIELD_NUMBER = 1;
     private int type_ = 0;
     /**
@@ -250,7 +246,7 @@ public final class Employee {
      */
     @java.lang.Override
     public boolean hasPayload() {
-      return payload_ != null;
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>.dto.Payload payload = 2;</code>
@@ -276,7 +272,7 @@ public final class Employee {
      */
     @java.lang.Override
     public boolean hasSource() {
-      return source_ != null;
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>.dto.Source source = 3;</code>
@@ -322,10 +318,10 @@ public final class Employee {
       if (type_ != com.karam.proto.events.Employee.Types.EMPLOYEE_CREATED.getNumber()) {
         output.writeEnum(1, type_);
       }
-      if (payload_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(2, getPayload());
       }
-      if (source_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         output.writeMessage(3, getSource());
       }
       if (tsMs_ != 0L) {
@@ -344,11 +340,11 @@ public final class Employee {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
       }
-      if (payload_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getPayload());
       }
-      if (source_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, getSource());
       }
@@ -457,11 +453,13 @@ public final class Employee {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static com.karam.proto.events.Employee.EventMessage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static com.karam.proto.events.Employee.EventMessage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -525,13 +523,20 @@ public final class Employee {
 
       // Construct using com.karam.proto.events.Employee.EventMessage.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getPayloadFieldBuilder();
+          getSourceFieldBuilder();
+        }
       }
       @java.lang.Override
       public Builder clear() {
@@ -585,19 +590,23 @@ public final class Employee {
         if (((from_bitField0_ & 0x00000001) != 0)) {
           result.type_ = type_;
         }
+        int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000002) != 0)) {
           result.payload_ = payloadBuilder_ == null
               ? payload_
               : payloadBuilder_.build();
+          to_bitField0_ |= 0x00000001;
         }
         if (((from_bitField0_ & 0x00000004) != 0)) {
           result.source_ = sourceBuilder_ == null
               ? source_
               : sourceBuilder_.build();
+          to_bitField0_ |= 0x00000002;
         }
         if (((from_bitField0_ & 0x00000008) != 0)) {
           result.tsMs_ = tsMs_;
         }
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -842,8 +851,10 @@ public final class Employee {
         } else {
           payloadBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000002;
-        onChanged();
+        if (payload_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
         return this;
       }
       /**
@@ -961,8 +972,10 @@ public final class Employee {
         } else {
           sourceBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000004;
-        onChanged();
+        if (source_ != null) {
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
         return this;
       }
       /**
@@ -1029,7 +1042,7 @@ public final class Employee {
        * @return This builder for chaining.
        */
       public Builder setTsMs(long value) {
-        
+
         tsMs_ = value;
         bitField0_ |= 0x00000008;
         onChanged();
@@ -1223,11 +1236,6 @@ public final class Employee {
       return new Payload();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.karam.proto.events.Employee.internal_static_dto_Payload_descriptor;
@@ -1241,6 +1249,7 @@ public final class Employee {
               com.karam.proto.events.Employee.Payload.class, com.karam.proto.events.Employee.Payload.Builder.class);
     }
 
+    private int bitField0_;
     public static final int UUID_FIELD_NUMBER = 1;
     @SuppressWarnings("serial")
     private volatile java.lang.Object uuid_ = "";
@@ -1416,7 +1425,7 @@ public final class Employee {
      */
     @java.lang.Override
     public boolean hasCreatedAt() {
-      return createdAt_ != null;
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp createdAt = 6;</code>
@@ -1442,7 +1451,7 @@ public final class Employee {
      */
     @java.lang.Override
     public boolean hasUpdatedAt() {
-      return updatedAt_ != null;
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>.google.protobuf.Timestamp updatedAt = 7;</code>
@@ -1489,10 +1498,10 @@ public final class Employee {
       if (salary_ != 0) {
         output.writeInt32(5, salary_);
       }
-      if (createdAt_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         output.writeMessage(6, getCreatedAt());
       }
-      if (updatedAt_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         output.writeMessage(7, getUpdatedAt());
       }
       getUnknownFields().writeTo(output);
@@ -1520,11 +1529,11 @@ public final class Employee {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, salary_);
       }
-      if (createdAt_ != null) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getCreatedAt());
       }
-      if (updatedAt_ != null) {
+      if (((bitField0_ & 0x00000002) != 0)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, getUpdatedAt());
       }
@@ -1641,11 +1650,13 @@ public final class Employee {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static com.karam.proto.events.Employee.Payload parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static com.karam.proto.events.Employee.Payload parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1709,13 +1720,20 @@ public final class Employee {
 
       // Construct using com.karam.proto.events.Employee.Payload.newBuilder()
       private Builder() {
-
+        maybeForceBuilderInitialization();
       }
 
       private Builder(
           com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
-
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getCreatedAtFieldBuilder();
+          getUpdatedAtFieldBuilder();
+        }
       }
       @java.lang.Override
       public Builder clear() {
@@ -1784,16 +1802,20 @@ public final class Employee {
         if (((from_bitField0_ & 0x00000010) != 0)) {
           result.salary_ = salary_;
         }
+        int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000020) != 0)) {
           result.createdAt_ = createdAtBuilder_ == null
               ? createdAt_
               : createdAtBuilder_.build();
+          to_bitField0_ |= 0x00000001;
         }
         if (((from_bitField0_ & 0x00000040) != 0)) {
           result.updatedAt_ = updatedAtBuilder_ == null
               ? updatedAt_
               : updatedAtBuilder_.build();
+          to_bitField0_ |= 0x00000002;
         }
+        result.bitField0_ |= to_bitField0_;
       }
 
       @java.lang.Override
@@ -2254,7 +2276,7 @@ public final class Employee {
        * @return This builder for chaining.
        */
       public Builder setSalary(int value) {
-        
+
         salary_ = value;
         bitField0_ |= 0x00000010;
         onChanged();
@@ -2337,8 +2359,10 @@ public final class Employee {
         } else {
           createdAtBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000020;
-        onChanged();
+        if (createdAt_ != null) {
+          bitField0_ |= 0x00000020;
+          onChanged();
+        }
         return this;
       }
       /**
@@ -2456,8 +2480,10 @@ public final class Employee {
         } else {
           updatedAtBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000040;
-        onChanged();
+        if (updatedAt_ != null) {
+          bitField0_ |= 0x00000040;
+          onChanged();
+        }
         return this;
       }
       /**
@@ -2663,11 +2689,6 @@ public final class Employee {
       return new Source();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return com.karam.proto.events.Employee.internal_static_dto_Source_descriptor;
@@ -3024,11 +3045,13 @@ public final class Employee {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static com.karam.proto.events.Employee.Source parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static com.karam.proto.events.Employee.Source parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)

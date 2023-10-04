@@ -42,7 +42,7 @@ jobs:
           file2="/home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java"
 
           # Replace with the appropriate comparison command for your files
-          if diff -b $file1 $file2; then
+          if diff $file1 $file2; then
             echo "No changes detected in protobuf files"
           else
             echo "Changes detected in protobuf files"
