@@ -27,19 +27,18 @@ jobs:
           # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
           curl -L -O https://github.com/karamjb/proto/archive/refs/heads/main.zip
           unzip -q main.zip -d ./proto
-          pwd
+          ls
 
       - name: Compile Protobuf Files
         run: |
           # Replace with the actual command to compile protobuf files
+          cd /home/runner/work/base-repo/proto/proto-main
           protoc -I=. --java_out=./ --java_opt="annotate_code" employee.proto
-          pwd
-          working-directory: ./proto/proto-main
 
       - name: Compare Protobuf Files
         run: |
           # Replace with the appropriate comparison command for your files
-          if diff -rq /proto/proto-main/com/karam/proto/events/Employee.java ./com/karam/proto/events/Employee.java; then
+          if diff -rq /home/runner/work/base-repo/proto/proto-main/com/karam/proto/events/Employee.java /home/runner/work/base-repo/com/karam/proto/events/Employee.java; then
             echo "No changes detected in protobuf files"
           else
             echo "Changes detected in protobuf files"
