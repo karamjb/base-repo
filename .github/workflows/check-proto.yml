@@ -31,6 +31,8 @@ jobs:
           pwd
           echo ls
           ls
+          echo java
+          java -v
 
       - name: Compile Protobuf Files
         run: |
@@ -47,6 +49,20 @@ jobs:
 
       - name: Compare Protobuf Files
         run: |
+          file1="/home/runner/work/base-repo/base-repo/proto/proto-main/com/karam/proto/events/Employee.java"
+          file2="/home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java"
+          
+          size1=$(stat -c %s "$file1")
+          size2=$(stat -c %s "$file2")
+
+          if [ "$size1" -eq "$size2" ]; then
+            echo "File sizes are equal."
+            exit 0
+          else
+            echo "File sizes are not equal."
+            exit 1
+          fi
+
           # Replace with the appropriate comparison command for your files
           if diff -qs <(sort /home/runner/work/base-repo/base-repo/proto/proto-main/com/karam/proto/events/Employee.java) <(sort /home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java); then
             echo "No changes detected in protobuf files"
