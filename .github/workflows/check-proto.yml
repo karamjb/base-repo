@@ -27,12 +27,22 @@ jobs:
           # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
           curl -L -O https://github.com/karamjb/proto/archive/refs/heads/main.zip
           unzip -q main.zip -d ./proto
+          echo pwd
+          pwd
+          echo ls
           ls
 
       - name: Compile Protobuf Files
         run: |
           # Replace with the actual command to compile protobuf files
+
           cd /home/runner/work/base-repo/proto/proto-main
+
+          echo pwd
+          pwd
+          echo ls
+          ls
+
           protoc -I=. --java_out=./ --java_opt="annotate_code" employee.proto
 
       - name: Compare Protobuf Files
