@@ -54,7 +54,7 @@ jobs:
         run: |
           # Replace with the actual command to compile protobuf files
           # cd /home/runner/work/base-repo/base-repo/proto/proto-main
-          protoc -I=. --java_out=${{ env.COMPILE_PATH }} --java_opt="annotate_code" ${{ env.DOWNLOAD_PATH }}/proto-main/*.proto
+          protoc -I=${{env.DOWNLOAD_PATH}}/proto-main --java_out=${{ env.COMPILE_PATH }} --java_opt="annotate_code" *.proto
 
       - name: Move files to repo
         run: |
