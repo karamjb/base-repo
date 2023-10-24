@@ -46,6 +46,7 @@ jobs:
             if [ -f "$file" ]; then
               echo "$text_to_add" | cat - "$file" > temp && mv temp "$file"
               echo "Options injected to $file"
+              cat $file
             fi
           done
 
