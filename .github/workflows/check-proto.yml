@@ -26,6 +26,8 @@ jobs:
         run: |
           pwd
           protoc --version
+          mkdir -p ${{env.COMPILE_PATH}}
+          mkdir -p ${{env.DOWNLOAD_PATH}}
 
       - name: Download Proto Files from Other Repository
         env:
