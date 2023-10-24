@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
-          curl -L -O -o ${{ env.DOWNLOAD_PATH }} https://github.com/karamjb/proto/archive/refs/heads/main.zip
+          curl -L --create-dirs -O --output-dir ${{ env.DOWNLOAD_PATH }} https://github.com/karamjb/proto/archive/refs/heads/main.zip
           unzip -q ${{ env.DOWNLOAD_PATH }}/main.zip -d ${{ env.DOWNLOAD_PATH }}
       
       - name: Inject Options
