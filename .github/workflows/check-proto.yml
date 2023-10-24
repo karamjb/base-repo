@@ -44,9 +44,8 @@ jobs:
 
           for file in "$directory"/*; do
             if [ -f "$file" ]; then
-              echo "$text_to_add" | cat - "$file" > temp && mv temp "$file"
+              sed -i "2i$text_to_add" "$file"
               echo "Options injected to $file"
-              echo cat $file
             fi
           done
 
