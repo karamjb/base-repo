@@ -58,7 +58,7 @@ jobs:
 
       - name: Move files to repo
         run: |
-          cp -r ${{ env.COMPILE_PATH }}/ ${{ env.OUT_PATH }}
+          cp -r ${{ env.COMPILE_PATH }}/* ${{ env.OUT_PATH }}
       - name: Commit proto files
         run: |
           git config --global user.name 'proto bot'
