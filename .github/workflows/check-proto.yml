@@ -11,6 +11,7 @@ env:
   COMPILE_PATH: /tmp/download/github/protocompile
   DOWNLOAD_PATH: /tmp/download/github/proto
   INJECT_OPTIONS: option java_package = "com.wss.message.broker.dto";\n
+  OUT_PATH: ./
       
 jobs:
   Compile-Proto-Files:
@@ -57,13 +58,13 @@ jobs:
 
       - name: Move files to repo
         run: |
-          mv -f ${{ env.COMPILE_PATH }} ./
+          mv -f ${{ env.COMPILE_PATH }}/ ${{ env.OUT_PATH }}
       - name: Commit proto files
         run: |
           git config --global user.name 'proto bot'
           git config --global user.email 'proto-bot@users.noreply.github.com'
           git add .
-          git commit -am "Automated cproto files"
+          git commit -am "Automated comiled proto files"
           git push
 
 
