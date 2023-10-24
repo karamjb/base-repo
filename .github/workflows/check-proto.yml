@@ -1,18 +1,23 @@
-name: Check Proto Files
+name: Compile Proto Files
 
 on:
   push:
   workflow_run:
-    workflows: ["Detect Proto Changes"]
+    workflows: ["Compile Proto Files"]
     types:
       - completed
-
+env:
+  PACKAGE_PATH: ./wss/proto/dto/
+  COMPILE_PATH: /tmp/download/github/protocompile
+  DOWNLOAD_PATH: /tmp/download/github/proto
+  INJECT_OPTIONS: option java_package = "com.wss.message.broker.dto";\n
+      
 jobs:
   Detect-Proto-Changes:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install protobuf
         run: sudo apt install -y protobuf-compiler
@@ -28,26 +33,36 @@ jobs:
         run: |
           # curl -L -O -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/karamjb/proto
           curl -L -O https://github.com/karamjb/proto/archive/refs/heads/main.zip
-          unzip -q main.zip -d ./proto
+          unzip -q main.zip -d ${{ env.DOWNLOAD_PATH }}
+      
+      - name: Inject Options
+        run: |
+          directory="${{env.DOWNLOAD_PATH}}/proto-main"
+          text_to_add=${{env.INJECT_OPTIONS}}
+
+          for file in "$directory"/*; do
+            if [ -f "$file" ]; then
+              echo "$text_to_add" | cat - "$file" > temp && mv temp "$file"
+              echo "Options injected to $file"
+            fi
+          done
 
       - name: Compile Protobuf Files
         run: |
           # Replace with the actual command to compile protobuf files
-          cd /home/runner/work/base-repo/base-repo/proto/proto-main
-          protoc -I=. --java_out=./ --java_opt="annotate_code" employee.proto
+          # cd /home/runner/work/base-repo/base-repo/proto/proto-main
+          protoc -I=. --java_out=${{ env.COMPILE_PATH }} --java_opt="annotate_code" ${{ env.DOWNLOAD_PATH }}/proto-main/*.proto
 
-      - name: Compare Protobuf Files
+      - name: Move files to repo
         run: |
-          file1="/home/runner/work/base-repo/base-repo/proto/proto-main/com/karam/proto/events/Employee.java"
-          file2="/home/runner/work/base-repo/base-repo/com/karam/proto/events/Employee.java"
+          mv -f ${{ env.COMPILE_PATH }} ./
+      - name: Commit proto files
+        run: |
+          git config --global user.name 'proto bot'
+          git config --global user.email 'proto-bot@users.noreply.github.com'
+          git commit -am "Automated cproto files"
+          git push
 
-          # Replace with the appropriate comparison command for your files
-          if diff $file1 $file2; then
-            echo "No changes detected in protobuf files"
-          else
-            echo "Changes detected in protobuf files"
-            diff -y $file1 $file2
-            exit 1
-            # Add any actions or commands you want to perform when changes are detected
-          fi
+
+    
 
