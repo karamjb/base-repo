@@ -40,7 +40,7 @@ jobs:
       - name: Inject Options
         run: |
           directory="${{env.DOWNLOAD_PATH}}/proto-main"
-          text_to_add=${{env.INJECT_OPTIONS}}
+          text_to_add='${{env.INJECT_OPTIONS}}'
 
           for file in "$directory"/*; do
             if [ -f "$file" ]; then
