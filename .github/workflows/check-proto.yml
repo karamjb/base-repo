@@ -3,7 +3,7 @@ name: Compile Proto Files
 on:
   push:
   workflow_run:
-    workflows: ["Compile Proto Files"]
+    workflows: ["Compile-Proto-Files"]
     types:
       - completed
 env:
