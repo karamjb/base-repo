@@ -13,7 +13,7 @@ env:
   INJECT_OPTIONS: option java_package = "com.wss.message.broker.dto";\n
       
 jobs:
-  Detect-Proto-Changes:
+  Compile-Proto-Files:
     runs-on: ubuntu-latest
 
     steps:
